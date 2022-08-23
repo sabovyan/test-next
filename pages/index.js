@@ -13,13 +13,13 @@ export const getServerSideProps = async (context) => {
     countries = await response.json();
 
     const response2 = await fetch('https://restcountries.com/v3.1/all');
-    countries1 = await response.json();
+    countries1 = await response2.json();
 
     const response3 = await fetch('https://restcountries.com/v3.1/all');
-    countries2 = await response.json();
+    countries2 = await response3.json();
 
     const response4 = await fetch('https://restcountries.com/v3.1/all');
-    countries3 = await response.json();
+    countries3 = await response4.json();
 
     return {
       props: {
