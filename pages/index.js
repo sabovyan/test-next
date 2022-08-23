@@ -6,15 +6,27 @@ import { useContext } from 'react';
 import styles from '../styles/Home.module.css';
 
 export const getServerSideProps = async (context) => {
-  let countries;
+  let countries, countries1, countries2, countries3;
 
   try {
     const response = await fetch('https://restcountries.com/v3.1/all');
     countries = await response.json();
 
+    const response2 = await fetch('https://restcountries.com/v3.1/all');
+    countries1 = await response.json();
+
+    const response3 = await fetch('https://restcountries.com/v3.1/all');
+    countries2 = await response.json();
+
+    const response4 = await fetch('https://restcountries.com/v3.1/all');
+    countries3 = await response.json();
+
     return {
       props: {
         countries,
+        countries1,
+        countries2,
+        countries3,
       },
     };
   } catch (err) {
