@@ -36,7 +36,7 @@ export default function Home(props) {
         <div key={country.cca3}>
           <p>
             <Link prefetch={false} href={`/country/${country.name.common}`}>
-              {country.name.common}
+              <button>{country.name.common}</button>
             </Link>
           </p>
         </div>
