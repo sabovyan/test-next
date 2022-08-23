@@ -31,7 +31,9 @@ export default function Country(props) {
   return (
     <div>
       <h1>{country[0].name?.common}</h1>
-      <Link href={'/'}>home</Link>
+      <Link prefetch={false} href={'/'}>
+        home
+      </Link>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function Home(props) {
       {countries.map((country) => (
         <div key={country.cca3}>
           <p>
-            <Link href={`/country/${country.name.common}`}>
+            <Link prefetch={false} href={`/country/${country.name.common}`}>
               {country.name.common}
             </Link>
           </p>
