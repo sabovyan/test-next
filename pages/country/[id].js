@@ -26,7 +26,6 @@ export const getServerSideProps = async (context) => {
 
 export default function Country(props) {
   const { country } = props;
-  console.log(`🐞 / Country / country`, country);
 
   return (
     <div>
