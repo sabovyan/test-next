@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext } from 'react';
+import camelCase from 'lodash/camelCase';
 
-import styles from '../styles/Home.module.css';
+import '@adyen/adyen-web/dist/adyen.css';
 
 export const getServerSideProps = async (context) => {
   let countries, countries1, countries2, countries3;
@@ -42,6 +42,46 @@ export const getServerSideProps = async (context) => {
 export default function Home(props) {
   const { countries } = props;
 
+  const addAdyen = async () => {
+    const adyen = await import(
+      /* webpackChunkName: "ADYENCHUNK" */
+      '@adyen/adyen-web'
+    );
+
+    const adyenCheckout = adyen.default;
+
+    const configuration = {
+      environment: 'test',
+      clientKey: 'test_870be2...', // Public key used for client-side authentication: https://docs.adyen.com/development-resources/client-side-authentication
+      analytics: {
+        enabled: true, // Set to false to not send analytics data to Adyen.
+      },
+      session: {
+        id: 'CSD9CAC3...', // Unique identifier for the payment session.
+        sessionData: 'Ab02b4c...', // The payment session data.
+      },
+      onPaymentCompleted: (result, component) => {
+        console.info(result, component);
+      },
+      onError: (error, component) => {
+        console.error(error.name, error.message, error.stack, component);
+      },
+      // Any payment method specific configuration. Find the configuration specific to each payment method:  https://docs.adyen.com/payment-methods
+      // For example, this is 3D Secure configuration for cards:
+      paymentMethodsConfiguration: {
+        card: {
+          hasHolderName: true,
+          holderNameRequired: true,
+          billingAddressRequired: true,
+        },
+      },
+    };
+    const checkout = await AdyenCheckout(configuration);
+    const dropinComponent = checkout
+      .create('dropin')
+      .mount('#dropin-container');
+  };
+
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       {countries.map((country) => (
@@ -53,12 +93,15 @@ export default function Home(props) {
                   console.log('hello');
                 }}
               >
-                {country.name.common}
+                {camelCase(country.name.common)}
               </button>
             </Link>
           </p>
         </div>
       ))}
+      <button onClick={addAdyen}>add adyen</button>
+
+      <div id="dropin-container"></div>
     </div>
   );
 }
