@@ -5,7 +5,7 @@ import camelCase from 'lodash/camelCase';
 
 import '@adyen/adyen-web/dist/adyen.css';
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
   let countries, countries1, countries2, countries3;
 
   try {
@@ -48,11 +48,13 @@ export default function Home(props) {
       '@adyen/adyen-web'
     );
 
-    const adyenCheckout = adyen.default;
+    console.log('addAdyen :>> ', adyen);
+
+    const AdyenCheckout = adyen.default;
 
     const configuration = {
       environment: 'test',
-      clientKey: 'test_870be2...', // Public key used for client-side authentication: https://docs.adyen.com/development-resources/client-side-authentication
+      clientKey: 'test_870be2854add4f56b86778353010f36c', // Public key used for client-side authentication: https://docs.adyen.com/development-resources/client-side-authentication
       analytics: {
         enabled: true, // Set to false to not send analytics data to Adyen.
       },

@@ -5,21 +5,33 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "analyze": "ANALYZE=true yarn build",
+    "analyze": "ANALYZE=true NODE_ENV=production next build && node scripts/bundleSize.ts",
+    "bundleSize": "node scripts/bundleSize.ts",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "bundlewatch": "bundlewatch"
   },
   "dependencies": {
     "@adyen/adyen-web": "^5.23.0",
     "lodash": "^4.17.21",
-    "next": "12.1.6",
+    "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swiper": "^8.3.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.5",
+    "@types/node": "^18.8.0",
+    "bundlewatch": "^0.3.3",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6"
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": ".next",
+        "maxSize": "100kB"
+      }
+    ]
   }
 }
