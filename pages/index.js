@@ -5,7 +5,8 @@ import camelCase from 'lodash/camelCase';
 
 import '@adyen/adyen-web/dist/adyen.css';
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   let countries, countries1, countries2, countries3;
 
   try {

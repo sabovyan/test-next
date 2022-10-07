@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
-/** @type {import('next'). */
 // export const getStaticProps = async (context) => {
-export const getServerSideProps = async (context) => {
+  export const getServerSideProps = async (context) => {
+  const start = new Date();
+
   const { params } = context;
 
   let country = null;
@@ -22,6 +23,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       country,
+      startString: start.toString(),
     },
   };
 };
@@ -35,7 +37,15 @@ export const getServerSideProps = async (context) => {
 // }
 
 export default function Country(props) {
-  const { country } = props;
+  const { country, startString } = props;
+
+  const start = new Date(startString);
+
+  const current = new Date();
+
+  const diff = (current.getTime() - start.getTime()) / 1000;
+
+  console.log(diff);
 
   return (
     <div>
