@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-// export const getStaticProps = async (context) => {
-  export const getServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
+  // export const getServerSideProps = async (context) => {
   const start = new Date();
 
   const { params } = context;
@@ -28,13 +28,13 @@ import Link from 'next/link';
   };
 };
 
-// export async function getStaticPaths() {
-//   return {
-//     // paths: [{ params: { id: 'Spain' } }, { params: { id: 'Malawi' } }],
-//     paths: [],
-//     fallback: 'blocking', // can also be true or 'blocking'
-//   };
-// }
+export async function getStaticPaths() {
+  return {
+    // paths: [{ params: { id: 'Spain' } }, { params: { id: 'Malawi' } }],
+    paths: [],
+    fallback: 'blocking', // can also be true or 'blocking'
+  };
+}
 
 export default function Country(props) {
   const { country, startString } = props;
